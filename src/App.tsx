@@ -6,7 +6,9 @@ import './App.global.css';
 const Hello = () => {
   return (
     <div>
-      <h1>Hello</h1>
+      <div>
+        <h1>Hello</h1>
+      </div>
     </div>
   );
 };
