@@ -1,0 +1,13 @@
+.frameButton {
+  background: none;
+  border: none;
+  color: #d8d8d8;
+  margin: 0px;
+  padding: 0px 10px;
+  transition: all 0.1s;
+  -webkit-app-region: no-drag;
+}
+
+.frameButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

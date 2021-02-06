@@ -5,7 +5,12 @@
 body {
   color: #252525;
   height: 100vh;
-  background: white;
+  background: linear-gradient(
+    116.1deg,
+    #2c1d77 0%,
+    #2333a6 99.99%,
+    #1b256f 100%
+  );
   font-family: sans-serif;
   padding: 0px;
   margin: 0px;
