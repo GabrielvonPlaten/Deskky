@@ -133,9 +133,7 @@ app.on('activate', () => {
 });
 
 ipcMain.on('close-app', (event, arg) => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
 ipcMain.on('mini-me', (event, arg) => {
