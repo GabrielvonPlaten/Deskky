@@ -5,6 +5,7 @@
   margin: 0px;
   padding: 0px 10px;
   transition: all 0.1s;
+  outline: none;
   -webkit-app-region: no-drag;
 }
 
