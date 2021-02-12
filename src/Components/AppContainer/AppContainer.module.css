@@ -30,6 +30,10 @@ li {
   margin-bottom: 20%;
 }
 
+.activeLink {
+  color: orange;
+}
+
 .navbarItem {
   color: #e6e6e6;
   text-decoration: none;
