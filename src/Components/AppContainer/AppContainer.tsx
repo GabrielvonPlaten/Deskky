@@ -1,46 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import styles from './AppContainer.module.css';
+import { Link, Switch, Route } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 
 // Components
 import { Home } from '../Home/Home';
 import { GpuComponent } from '../GpuComponent/GpuComponent';
+import { Memory } from '../Memory/Memory';
 
-export const AppContainer = () => {
+export const AppContainer: React.FC = () => {
   const [CPU_INFO, SET_CPU_INFO] = useState<any>([]);
-  const [buttons, setButtons] = useState<any>([
-    {
-      id: 0,
-      name: 'Home',
-      rName: 'home',
-      active: true,
-    },
-    {
-      id: 1,
-      name: 'Graphics',
-      rName: 'graphics',
-      active: false,
-    },
+  const [routerLinks, setRouterLink] = useState<any>([
+    { id: 0, name: 'Home', rName: '/' },
+    { id: 1, name: 'Graphics', rName: '/graphics' },
+    { id: 2, name: 'Memory', rName: '/memory' },
   ]);
 
   useEffect(() => {
     setInfo();
-  }, []);
+  });
 
-  const onClick = (id: number) => {
-    let updatedButtons = buttons.map((btn: any) => {
-      if (btn.id === id) {
-        return { ...btn, active: !btn.active };
-      }
-      return btn;
-    });
-
-    setButtons(updatedButtons);
-    console.log(buttons);
-  };
-
-  const setInfo = () => {
-    ipcRenderer.on('CPU_INFO:get', (e, value) => {
+  const setInfo = async () => {
+    await ipcRenderer.on('CPU_INFO:get', (e, value) => {
       SET_CPU_INFO(value);
     });
   };
@@ -49,18 +30,36 @@ export const AppContainer = () => {
     <div className={styles.appContainer}>
       <div className={styles.sidebar}>
         <ul>
-          {buttons.map((button: any) => (
+          <li>
+            <Link className={styles.navbarItem} to="/">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link className={styles.navbarItem} to="/graphics">
+              Graphics
+            </Link>
+          </li>
+          <li>
+            <Link className={styles.navbarItem} to="/memory">
+              Memory
+            </Link>
+          </li>
+          {/* {buttons.map((button: any) => (
             <li>
               <button key={button.id} onClick={() => onClick(button.id)}>
-                {button.name} - {button.active ? 'ON' : 'OFF'}
+                {button.name} - {button.active ? 'ON' : 'OFF'} - {button.id}
               </button>
             </li>
-          ))}
+          ))} */}
         </ul>
       </div>
       <div className={styles.containerMonitor}>
-        {buttons[0].active && <Home CPU_INFO={CPU_INFO} />}
-        {buttons[1].active && <GpuComponent />}
+        <Switch>
+          <Route path="/" exact render={() => <Home CPU_INFO={CPU_INFO} />} />
+          <Route path="/graphics" component={GpuComponent} />
+          <Route path="/memory" component={Memory} />
+        </Switch>
       </div>
     </div>
   );
