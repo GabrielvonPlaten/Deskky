@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './AppContainer.module.css';
-import { Link, Switch, Route } from 'react-router-dom';
+import { NavLink as Link, Switch, Route } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 
 // Components
@@ -31,17 +31,29 @@ export const AppContainer: React.FC = () => {
       <div className={styles.sidebar}>
         <ul>
           <li>
-            <Link className={styles.navbarItem} to="/">
+            <Link
+              className={styles.navbarItem}
+              activeClassName={styles.activeLink}
+              to="/"
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link className={styles.navbarItem} to="/graphics">
+            <Link
+              className={styles.navbarItem}
+              activeClassName={styles.activeLink}
+              to="/graphics"
+            >
               Graphics
             </Link>
           </li>
           <li>
-            <Link className={styles.navbarItem} to="/memory">
+            <Link
+              className={styles.navbarItem}
+              activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
+              to="/memory"
+            >
               Memory
             </Link>
           </li>

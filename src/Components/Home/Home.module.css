@@ -1,3 +1,24 @@
+.homeContainer {
+  padding: 0;
+  margin: 0;
+}
+
 .cpuBrandName {
   font-weight: 300;
+  font-size: 1.1rem;
+}
+
+rect {
+  border: 1px solid red;
+  fill: rgba(155, 155, 155, 0.2);
+}
+
+.chartContainer {
+  width: 96.9%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+g,
+text {
+  fill: #fafafa;
 }

@@ -27,7 +27,7 @@
 .siderbar,
 ul,
 li {
-  margin-bottom: 20%;
+  padding: 5%;
 }
 
 .activeLink {
@@ -37,6 +37,6 @@ li {
 .navbarItem {
   color: #e6e6e6;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
 }
