@@ -64,6 +64,16 @@ export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
       <button className="btn" onClick={() => clearGraph()}>
         Clear
       </button>
+      <div className={styles.systemInformation}>
+        <div>
+          <label>Usage</label>
+          <p>{Math.round(CPU_USAGE)}%</p>
+          <label>Speed</label>
+          <p>{CPU_INFO?.speed} GHz</p>
+          <label>Cores</label>
+          <p>{CPU_INFO?.cores}</p>
+        </div>
+      </div>
     </div>
   );
 };

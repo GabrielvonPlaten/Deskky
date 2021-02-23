@@ -26,6 +26,7 @@ export const AppContainer: React.FC = () => {
     await ipcRenderer.on('CPU_INFO:get', (e, value) => {
       SET_CPU_INFO(value);
     });
+    console.log(CPU_INFO);
 
     await ipcRenderer.on('CPU_USAGE:get', (e, value) => {
       SET_CPU_USAGE(value);
