@@ -7,9 +7,11 @@ import { ipcRenderer } from 'electron';
 import { Home } from '../Home/Home';
 import { GpuComponent } from '../GpuComponent/GpuComponent';
 import { Memory } from '../Memory/Memory';
+import { getCPUUsage } from 'process';
 
 export const AppContainer: React.FC = () => {
   const [CPU_INFO, SET_CPU_INFO] = useState<any>([]);
+  const [CPU_USAGE, SET_CPU_USAGE] = useState<any>([]);
   const [routerLinks, setRouterLink] = useState<any>([
     { id: 0, name: 'Home', rName: '/' },
     { id: 1, name: 'Graphics', rName: '/graphics' },
@@ -23,6 +25,10 @@ export const AppContainer: React.FC = () => {
   const setInfo = async () => {
     await ipcRenderer.on('CPU_INFO:get', (e, value) => {
       SET_CPU_INFO(value);
+    });
+
+    await ipcRenderer.on('CPU_USAGE:get', (e, value) => {
+      SET_CPU_USAGE(value);
     });
   };
 
@@ -68,7 +74,11 @@ export const AppContainer: React.FC = () => {
       </div>
       <div className={styles.containerMonitor}>
         <Switch>
-          <Route path="/" exact render={() => <Home CPU_INFO={CPU_INFO} />} />
+          <Route
+            path="/"
+            exact
+            render={() => <Home CPU_INFO={CPU_INFO} CPU_USAGE={CPU_USAGE} />}
+          />
           <Route path="/graphics" component={GpuComponent} />
           <Route path="/memory" component={Memory} />
         </Switch>

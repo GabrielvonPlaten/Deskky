@@ -1,21 +1,24 @@
 .homeContainer {
-  padding: 0;
+  padding-right: 15px;
   margin: 0;
 }
 
 .cpuBrandName {
   font-weight: 300;
   font-size: 1.1rem;
+  text-decoration: underline;
+  text-decoration-color: #9b9b9b6e;
 }
 
 rect {
   border: 1px solid red;
-  fill: rgba(155, 155, 155, 0.2);
+  fill: rgba(155, 155, 155, 0.137);
 }
 
 .chartContainer {
   width: 96.9%;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 5px;
 }
 
 g,

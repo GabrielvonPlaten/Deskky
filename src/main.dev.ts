@@ -16,7 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
-import { CPU_Info } from '../SI/CPU';
+import { CPU_Info, CPU_USAGE } from '../SI/CPU';
 
 export default class AppUpdater {
   constructor() {
@@ -94,6 +94,9 @@ const createWindow = async () => {
       mainWindow.show();
       mainWindow.focus();
       getCPUInfo();
+      setInterval(() => {
+        sendCPUUsage();
+      }, 1000);
     }
   });
 
@@ -145,6 +148,10 @@ ipcMain.on('mini-me', (event, arg) => {
 
 const getCPUInfo = async () => {
   const data = await CPU_Info();
-
   mainWindow?.webContents.send('CPU_INFO:get', data);
+};
+
+const sendCPUUsage = async () => {
+  const cpuUsageData = await CPU_USAGE();
+  mainWindow?.webContents.send('CPU_USAGE:get', cpuUsageData);
 };

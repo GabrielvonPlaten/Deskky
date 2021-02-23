@@ -19,3 +19,19 @@ body {
 li {
   list-style: none;
 }
+
+button {
+  outline: none;
+}
+
+.btn {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fafafa;
+  background: rgba(155, 155, 155, 0.137);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.137);
+}
