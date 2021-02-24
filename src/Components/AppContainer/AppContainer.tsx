@@ -26,7 +26,6 @@ export const AppContainer: React.FC = () => {
     await ipcRenderer.on('CPU_INFO:get', (e, value) => {
       SET_CPU_INFO(value);
     });
-    console.log(CPU_INFO);
 
     await ipcRenderer.on('CPU_USAGE:get', (e, value) => {
       SET_CPU_USAGE(value);
@@ -36,42 +35,42 @@ export const AppContainer: React.FC = () => {
   return (
     <div className={styles.appContainer}>
       <div className={styles.sidebar}>
-        <ul>
-          <li>
-            <Link
-              className={styles.navbarItem}
-              activeClassName={styles.activeLink}
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={styles.navbarItem}
-              activeClassName={styles.activeLink}
-              to="/graphics"
-            >
-              Graphics
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={styles.navbarItem}
-              activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
-              to="/memory"
-            >
-              Memory
-            </Link>
-          </li>
-          {/* {buttons.map((button: any) => (
+        <div className={styles.navbarItem__container}>
+          <Link
+            exact
+            className={styles.navbarItem}
+            activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
+            to="/"
+          >
+            Home
+          </Link>
+        </div>
+        <div className={styles.navbarItem__container}>
+          <Link
+            className={styles.navbarItem}
+            activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
+            to="/graphics"
+          >
+            Graphics
+          </Link>
+        </div>
+        <div className={styles.navbarItem__container}>
+          <Link
+            className={styles.navbarItem}
+            activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
+            to="/memory"
+          >
+            Memory
+          </Link>
+        </div>
+
+        {/* {buttons.map((button: any) => (
             <li>
               <button key={button.id} onClick={() => onClick(button.id)}>
                 {button.name} - {button.active ? 'ON' : 'OFF'} - {button.id}
               </button>
             </li>
           ))} */}
-        </ul>
       </div>
       <div className={styles.containerMonitor}>
         <Switch>
@@ -80,8 +79,8 @@ export const AppContainer: React.FC = () => {
             exact
             render={() => <Home CPU_INFO={CPU_INFO} CPU_USAGE={CPU_USAGE} />}
           />
-          <Route path="/graphics" component={GpuComponent} />
-          <Route path="/memory" component={Memory} />
+          <Route path="/graphics" exact component={GpuComponent} />
+          <Route path="/memory" exact component={Memory} />
         </Switch>
       </div>
     </div>

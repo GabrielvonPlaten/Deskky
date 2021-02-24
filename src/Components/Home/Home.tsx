@@ -4,17 +4,18 @@ import styles from './Home.module.css';
 
 export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
   const options = {
+    title: 'CPU Load %',
     legend: 'none',
+    curveType: 'function',
     chartArea: {
       left: 30,
       width: '100%',
     },
-    height: '350px',
+    height: '375px',
     lineWidth: 1,
     enableInteractivity: false,
-    title: 'CPU Load %',
     series: {
-      0: { color: 'orange', curveType: 'function' },
+      0: { color: '#ff9a35' },
     },
     hAxis: {
       title: 'Seconds',
@@ -38,7 +39,9 @@ export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
 
   const updateCpuHistogram = () => {
     let newArr = [...chartData];
+    // newArr.splice(1, 1);
     newArr.push([newArr.length, CPU_USAGE]);
+
     setChartData(newArr);
   };
 
