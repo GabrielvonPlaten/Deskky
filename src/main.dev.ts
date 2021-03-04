@@ -95,9 +95,9 @@ const createWindow = async () => {
       mainWindow.show();
       mainWindow.focus();
       getCPUInfo();
-      getGPUInfo();
 
       setInterval(() => {
+        getGPUInfo();
         getCPUUsage();
       }, 1000);
     }
