@@ -17,6 +17,7 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 
 import { CPU_Info, CPU_USAGE } from '../SI/CPU';
+import { GPU_Info } from '../SI/GPU';
 
 export default class AppUpdater {
   constructor() {
@@ -71,7 +72,7 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: process.env.NODE_ENV === 'development' ? 1200 : 1000,
+    width: process.env.NODE_ENV === 'development' ? 1425 : 1200,
     height: 720,
     frame: false,
     icon: getAssetPath('icon.png'),
@@ -94,8 +95,10 @@ const createWindow = async () => {
       mainWindow.show();
       mainWindow.focus();
       getCPUInfo();
+      getGPUInfo();
+
       setInterval(() => {
-        sendCPUUsage();
+        getCPUUsage();
       }, 1000);
     }
   });
@@ -146,12 +149,18 @@ ipcMain.on('mini-me', (event, arg) => {
   BrowserWindow.getFocusedWindow()?.minimize();
 });
 
+// System Information
 const getCPUInfo = async () => {
   const data = await CPU_Info();
   mainWindow?.webContents.send('CPU_INFO:get', data);
 };
 
-const sendCPUUsage = async () => {
+const getCPUUsage = async () => {
   const cpuUsageData = await CPU_USAGE();
   mainWindow?.webContents.send('CPU_USAGE:get', cpuUsageData);
+};
+
+const getGPUInfo = async () => {
+  const data = await GPU_Info();
+  mainWindow?.webContents.send('GPU_INFO:get', data);
 };

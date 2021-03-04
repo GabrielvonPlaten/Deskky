@@ -46,15 +46,13 @@ export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
   };
 
   const clearGraph = () => {
-    console.log('hello');
-
     const newArr = [...chartData];
     newArr.length = 3;
     setChartData(newArr);
   };
 
   return (
-    <div className={styles.homeContainer}>
+    <div className={styles.container}>
       <h4 className={styles.cpuBrandName}>{CPU_INFO?.brand}</h4>
       <div className={styles.chartContainer}>
         <Chart

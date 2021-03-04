@@ -7,11 +7,11 @@ import { ipcRenderer } from 'electron';
 import { Home } from '../Home/Home';
 import { GpuComponent } from '../GpuComponent/GpuComponent';
 import { Memory } from '../Memory/Memory';
-import { getCPUUsage } from 'process';
 
 export const AppContainer: React.FC = () => {
-  const [CPU_INFO, SET_CPU_INFO] = useState<any>([]);
-  const [CPU_USAGE, SET_CPU_USAGE] = useState<any>([]);
+  const [CPU_INFO, SET_CPU_INFO] = useState<any[]>([]);
+  const [CPU_USAGE, SET_CPU_USAGE] = useState<any[]>([]);
+  const [GPU_INFO, SET_GPU_INFO] = useState<any[]>([]);
   const [routerLinks, setRouterLink] = useState<any>([
     { id: 0, name: 'Home', rName: '/' },
     { id: 1, name: 'Graphics', rName: '/graphics' },
@@ -30,6 +30,10 @@ export const AppContainer: React.FC = () => {
     await ipcRenderer.on('CPU_USAGE:get', (e, value) => {
       SET_CPU_USAGE(value);
     });
+
+    await ipcRenderer.on('GPU_INFO:get', (e, value) => {
+      SET_GPU_INFO(value);
+    });
   };
 
   return (
@@ -42,7 +46,7 @@ export const AppContainer: React.FC = () => {
             activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
             to="/"
           >
-            Home
+            CPU
           </Link>
         </div>
         <div className={styles.navbarItem__container}>
@@ -79,7 +83,11 @@ export const AppContainer: React.FC = () => {
             exact
             render={() => <Home CPU_INFO={CPU_INFO} CPU_USAGE={CPU_USAGE} />}
           />
-          <Route path="/graphics" exact component={GpuComponent} />
+          <Route
+            path="/graphics"
+            exact
+            render={() => <GpuComponent GPU_INFO={GPU_INFO} />}
+          />
           <Route path="/memory" exact component={Memory} />
         </Switch>
       </div>

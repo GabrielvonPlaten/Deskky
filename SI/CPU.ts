@@ -6,7 +6,7 @@ export const CPU_Info = async () => {
 };
 
 export const CPU_USAGE = async () => {
-  return cpu.usage().then((cpuPercentage: any) => {
+  return cpu.usage().then((cpuPercentage: number) => {
     return cpuPercentage; // 10.38
   });
 };
