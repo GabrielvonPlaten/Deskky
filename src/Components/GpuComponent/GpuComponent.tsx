@@ -3,7 +3,6 @@ import { Chart } from 'react-google-charts';
 import styles from './GpuComponent.module.css';
 
 export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
-  console.log(GPU_INFO);
   const options = {
     title: 'Memory Used',
     legend: 'none',
@@ -94,6 +93,8 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
               unit: 'celsius',
             }).format(GPU_INFO?.controllers?.lastItem.temperatureGpu)}
           </p>
+          <label>Driver V.</label>
+          <p>{GPU_INFO?.controllers?.lastItem.driverVersion}</p>
         </div>
         <div>
           <label>VRam</label>
