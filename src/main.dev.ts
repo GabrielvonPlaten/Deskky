@@ -16,7 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
-import { CPU_Info, CPU_USAGE, CPU_TEMP } from '../SI/CPU';
+import { CPU_Info, CPU_USAGE, CPU_TEMP, CPU_TIME } from '../SI/CPU';
 import { GPU_Info } from '../SI/GPU';
 import { Memory_Info } from '../SI/Memory';
 
@@ -163,7 +163,8 @@ const getCPUInfo = async () => {
 
 const getCPUUsage = async () => {
   const cpuUsageData = await CPU_USAGE();
-  mainWindow?.webContents.send('CPU_USAGE:get', cpuUsageData);
+  const cpuTime = await CPU_TIME();
+  mainWindow?.webContents.send('CPU_USAGE:get', { cpuUsageData, cpuTime });
 };
 
 const getGPUInfo = async () => {
