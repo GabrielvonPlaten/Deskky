@@ -16,8 +16,10 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
-import { CPU_Info, CPU_USAGE } from '../SI/CPU';
+import { CPU_Info, CPU_USAGE, CPU_TEMP } from '../SI/CPU';
 import { GPU_Info } from '../SI/GPU';
+
+import { Extra_CPU_Info } from '../SI/CPU';
 
 export default class AppUpdater {
   constructor() {
@@ -95,6 +97,7 @@ const createWindow = async () => {
       mainWindow.show();
       mainWindow.focus();
       getCPUInfo();
+      getExtraCpuInfo();
 
       setInterval(() => {
         getGPUInfo();
@@ -152,7 +155,8 @@ ipcMain.on('mini-me', (event, arg) => {
 // System Information
 const getCPUInfo = async () => {
   const data = await CPU_Info();
-  mainWindow?.webContents.send('CPU_INFO:get', data);
+  const cpuTemp = await CPU_TEMP();
+  mainWindow?.webContents.send('CPU_INFO:get', { data, cpuTemp });
 };
 
 const getCPUUsage = async () => {
@@ -163,4 +167,10 @@ const getCPUUsage = async () => {
 const getGPUInfo = async () => {
   const data = await GPU_Info();
   mainWindow?.webContents.send('GPU_INFO:get', data);
+};
+
+// Extra info | Not to be used
+const getExtraCpuInfo = async () => {
+  const data = await Extra_CPU_Info();
+  console.log(data);
 };

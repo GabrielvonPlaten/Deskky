@@ -70,9 +70,28 @@ export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
           <label>Usage</label>
           <p>{Math.round(CPU_USAGE)}%</p>
           <label>Speed</label>
-          <p>{CPU_INFO?.speed} GHz</p>
+          <p>{CPU_INFO?.data?.speed} GHz</p>
           <label>Cores</label>
-          <p>{CPU_INFO?.cores}</p>
+          <p>{CPU_INFO?.data?.cores}</p>
+        </div>
+        <div>
+          {CPU_INFO?.cpuTemp.min !==
+          (
+            <div>
+              <label>Temp.</label>
+              <p>
+                {new Intl.NumberFormat('de-DE', {
+                  style: 'unit',
+                  unit: 'celsius',
+                }).format(CPU_INFO?.cpuTemp.min)}{' '}
+                /
+                {new Intl.NumberFormat('de-DE', {
+                  style: 'unit',
+                  unit: 'celsius',
+                }).format(CPU_INFO?.cpuTemp.max)}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
