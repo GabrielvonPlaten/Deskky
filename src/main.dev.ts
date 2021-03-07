@@ -18,6 +18,7 @@ import MenuBuilder from './menu';
 
 import { CPU_Info, CPU_USAGE, CPU_TEMP } from '../SI/CPU';
 import { GPU_Info } from '../SI/GPU';
+import { Memory_Info } from '../SI/Memory';
 
 import { Extra_CPU_Info } from '../SI/CPU';
 
@@ -97,6 +98,7 @@ const createWindow = async () => {
       mainWindow.show();
       mainWindow.focus();
       getCPUInfo();
+      getMemoryInfo();
       getExtraCpuInfo();
 
       setInterval(() => {
@@ -167,6 +169,11 @@ const getCPUUsage = async () => {
 const getGPUInfo = async () => {
   const data = await GPU_Info();
   mainWindow?.webContents.send('GPU_INFO:get', data);
+};
+
+const getMemoryInfo = async () => {
+  const data = await Memory_Info();
+  mainWindow?.webContents.send('Memory_INFO:get', data);
 };
 
 // Extra info | Not to be used

@@ -12,6 +12,7 @@ export const AppContainer: React.FC = () => {
   const [CPU_INFO, SET_CPU_INFO] = useState<any[]>([]);
   const [CPU_USAGE, SET_CPU_USAGE] = useState<any[]>([]);
   const [GPU_INFO, SET_GPU_INFO] = useState<any[]>([]);
+  const [MEMORY_INFO, SET_MEMORY_INFO] = useState<any[]>([]);
   const [routerLinks, setRouterLink] = useState<any>([
     { id: 0, name: 'Home', rName: '/' },
     { id: 1, name: 'Graphics', rName: '/graphics' },
@@ -33,6 +34,10 @@ export const AppContainer: React.FC = () => {
 
     await ipcRenderer.on('GPU_INFO:get', (e, value) => {
       SET_GPU_INFO(value);
+    });
+
+    await ipcRenderer.on('Memory_INFO:get', (e, value) => {
+      SET_MEMORY_INFO(value);
     });
   };
 
@@ -88,7 +93,11 @@ export const AppContainer: React.FC = () => {
             exact
             render={() => <GpuComponent GPU_INFO={GPU_INFO} />}
           />
-          <Route path="/memory" exact component={Memory} />
+          <Route
+            path="/memory"
+            exact
+            render={() => <Memory MEMORY_INFO={MEMORY_INFO} />}
+          />
         </Switch>
       </div>
     </div>
