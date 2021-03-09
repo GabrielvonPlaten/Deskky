@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 import styles from './Home.module.css';
 
-export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
+import {
+  CPU_INFO_Interface,
+  CPU_USAGE_Interface,
+} from '../../Interfaces/CPUInterface';
+
+export const Home: React.FC<CPU_INFO_Interface & CPU_USAGE_Interface> = ({
+  CPU_INFO,
+  CPU_USAGE,
+}) => {
   const options = {
     title: 'CPU Load %',
     legend: 'none',
@@ -81,9 +89,9 @@ export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
           <label>Usage</label>
           <p>{Math.round(CPU_USAGE.cpuUsageData)}%</p>
           <label>Speed</label>
-          <p>{CPU_INFO?.data?.speed} GHz</p>
+          <p>{CPU_INFO?.speed} GHz</p>
           <label>Cores</label>
-          <p>{CPU_INFO?.data?.cores}</p>
+          <p>{CPU_INFO?.cores}</p>
         </div>
         <div>
           {CPU_USAGE?.cpuTime && (
@@ -92,19 +100,19 @@ export const Home: React.FC<any> = ({ CPU_INFO, CPU_USAGE }) => {
               <p>{convertUpTime(CPU_USAGE?.cpuTime)}</p>
             </>
           )}
-          {CPU_INFO?.cpuTemp?.min && (
+          {CPU_USAGE?.cpuTemp?.min && (
             <>
               <label>Temp.</label>
               <p>
                 {new Intl.NumberFormat('de-DE', {
                   style: 'unit',
                   unit: 'celsius',
-                }).format(CPU_INFO?.cpuTemp?.min)}{' '}
+                }).format(CPU_USAGE?.cpuTemp?.min)}{' '}
                 /
                 {new Intl.NumberFormat('de-DE', {
                   style: 'unit',
                   unit: 'celsius',
-                }).format(CPU_INFO?.cpuTemp?.max)}
+                }).format(CPU_USAGE?.cpuTemp?.max)}
               </p>
             </>
           )}

@@ -7,16 +7,18 @@ import { ipcRenderer } from 'electron';
 import { Home } from '../Home/Home';
 import { GpuComponent } from '../GpuComponent/GpuComponent';
 import { Memory } from '../Memory/Memory';
+import { Devices } from '../Devices/Devices';
 
 export const AppContainer: React.FC = () => {
-  const [CPU_INFO, SET_CPU_INFO] = useState<any[]>([]);
-  const [CPU_USAGE, SET_CPU_USAGE] = useState<any[]>([]);
-  const [GPU_INFO, SET_GPU_INFO] = useState<any[]>([]);
-  const [MEMORY_INFO, SET_MEMORY_INFO] = useState<any[]>([]);
+  const [CPU_INFO, SET_CPU_INFO] = useState([]);
+  const [CPU_USAGE, SET_CPU_USAGE] = useState([]);
+  const [GPU_INFO, SET_GPU_INFO] = useState([]);
+  const [MEMORY_INFO, SET_MEMORY_INFO] = useState([]);
   const [routerLinks, setRouterLink] = useState<any>([
-    { id: 0, name: 'Home', rName: '/' },
+    { id: 0, name: 'CPU', rName: '/' },
     { id: 1, name: 'Graphics', rName: '/graphics' },
     { id: 2, name: 'Memory', rName: '/memory' },
+    { id: 3, name: 'Devices', rName: '/devices' },
   ]);
 
   useEffect(() => {
@@ -44,34 +46,18 @@ export const AppContainer: React.FC = () => {
   return (
     <div className={styles.appContainer}>
       <div className={styles.sidebar}>
-        <div className={styles.navbarItem__container}>
-          <Link
-            exact
-            className={styles.navbarItem}
-            activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
-            to="/"
-          >
-            CPU
-          </Link>
-        </div>
-        <div className={styles.navbarItem__container}>
-          <Link
-            className={styles.navbarItem}
-            activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
-            to="/graphics"
-          >
-            Graphics
-          </Link>
-        </div>
-        <div className={styles.navbarItem__container}>
-          <Link
-            className={styles.navbarItem}
-            activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
-            to="/memory"
-          >
-            Memory
-          </Link>
-        </div>
+        {routerLinks.map((link) => (
+          <div className={styles.navbarItem__container}>
+            <Link
+              exact
+              className={styles.navbarItem}
+              activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
+              to={link.rName}
+            >
+              {link.name}
+            </Link>
+          </div>
+        ))}
 
         {/* {buttons.map((button: any) => (
             <li>
@@ -98,6 +84,7 @@ export const AppContainer: React.FC = () => {
             exact
             render={() => <Memory MEMORY_INFO={MEMORY_INFO} />}
           />
+          <Route path="/devices" exact render={() => <Devices />} />
         </Switch>
       </div>
     </div>
