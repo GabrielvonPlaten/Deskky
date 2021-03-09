@@ -157,14 +157,18 @@ ipcMain.on('mini-me', (event, arg) => {
 // System Information
 const getCPUInfo = async () => {
   const data = await CPU_Info();
-  const cpuTemp = await CPU_TEMP();
-  mainWindow?.webContents.send('CPU_INFO:get', { data, cpuTemp });
+  mainWindow?.webContents.send('CPU_INFO:get', data);
 };
 
 const getCPUUsage = async () => {
   const cpuUsageData = await CPU_USAGE();
   const cpuTime = await CPU_TIME();
-  mainWindow?.webContents.send('CPU_USAGE:get', { cpuUsageData, cpuTime });
+  const cpuTemp = await CPU_TEMP();
+  mainWindow?.webContents.send('CPU_USAGE:get', {
+    cpuUsageData,
+    cpuTime,
+    cpuTemp,
+  });
 };
 
 const getGPUInfo = async () => {
@@ -180,5 +184,4 @@ const getMemoryInfo = async () => {
 // Extra info | Not to be used
 const getExtraCpuInfo = async () => {
   const data = await Extra_CPU_Info();
-  console.log(data);
 };
