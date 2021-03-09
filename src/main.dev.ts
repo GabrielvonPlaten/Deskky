@@ -78,7 +78,7 @@ const createWindow = async () => {
     width: process.env.NODE_ENV === 'development' ? 1425 : 1200,
     height: 720,
     frame: false,
-    icon: getAssetPath('icon.png'),
+    icon: getAssetPath('icon_2.png'),
     webPreferences: {
       nodeIntegration: true,
     },
