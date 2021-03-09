@@ -21,6 +21,7 @@ import { GPU_Info } from '../SI/GPU';
 import { Memory_Info } from '../SI/Memory';
 
 import { Extra_CPU_Info } from '../SI/CPU';
+import { Devices_Info, Printer_Info } from '../SI/Devices';
 
 export default class AppUpdater {
   constructor() {
@@ -100,6 +101,7 @@ const createWindow = async () => {
       getCPUInfo();
       getMemoryInfo();
       getExtraCpuInfo();
+      getDevicesInfo();
 
       setInterval(() => {
         getGPUInfo();
@@ -179,6 +181,15 @@ const getGPUInfo = async () => {
 const getMemoryInfo = async () => {
   const data = await Memory_Info();
   mainWindow?.webContents.send('Memory_INFO:get', data);
+};
+
+const getDevicesInfo = async () => {
+  const devicesData = await Devices_Info();
+  const printerData = await Printer_Info();
+  mainWindow?.webContents.send('Devices_Info:get', {
+    devicesData,
+    printerData,
+  });
 };
 
 // Extra info | Not to be used
