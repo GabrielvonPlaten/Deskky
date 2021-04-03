@@ -29,6 +29,8 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
   };
 
   useEffect(() => {
+    console.log(GPU_INFO);
+
     updateGpuHistogram();
   }, [GPU_INFO]);
 
@@ -109,6 +111,16 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
             {GPU_INFO?.controllers?.lastItem.powerDraw} /{' '}
             {GPU_INFO?.controllers?.lastItem.powerLimit} W
           </p>
+        </div>
+        <div>
+          {GPU_INFO.displays.map((d, index) => (
+            <>
+              <label>Display {index + 1}</label>
+              <p>
+                {d.resolutionX} - {d.resolutionX} /
+              </p>
+            </>
+          ))}
         </div>
       </div>
     </div>

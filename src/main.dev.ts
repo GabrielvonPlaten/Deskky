@@ -15,13 +15,14 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+import emitter from 'events';
 
 import { CPU_Info, CPU_USAGE, CPU_TEMP, CPU_TIME } from '../SI/CPU';
 import { GPU_Info } from '../SI/GPU';
 import { Memory_Info } from '../SI/Memory';
+import { Devices_Info, Printer_Info } from '../SI/Devices';
 
 import { Extra_CPU_Info } from '../SI/CPU';
-import { Devices_Info, Printer_Info } from '../SI/Devices';
 
 export default class AppUpdater {
   constructor() {
@@ -99,11 +100,11 @@ const createWindow = async () => {
       mainWindow.show();
       mainWindow.focus();
       getCPUInfo();
-      getMemoryInfo();
       getExtraCpuInfo();
       getDevicesInfo();
 
       setInterval(() => {
+        getMemoryInfo();
         getGPUInfo();
         getCPUUsage();
       }, 1000);
@@ -186,7 +187,7 @@ const getMemoryInfo = async () => {
 const getDevicesInfo = async () => {
   const devicesData = await Devices_Info();
   const printerData = await Printer_Info();
-  mainWindow?.webContents.send('Devices_Info:get', {
+  mainWindow?.webContents.send('Devices_INFO:get', {
     devicesData,
     printerData,
   });

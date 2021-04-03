@@ -14,6 +14,7 @@ export const AppContainer: React.FC = () => {
   const [CPU_USAGE, SET_CPU_USAGE] = useState([]);
   const [GPU_INFO, SET_GPU_INFO] = useState([]);
   const [MEMORY_INFO, SET_MEMORY_INFO] = useState([]);
+  const [DEVICES, SET_DEVICES] = useState([]);
   const [routerLinks, setRouterLink] = useState<any>([
     { id: 0, name: 'CPU', rName: '/' },
     { id: 1, name: 'Graphics', rName: '/graphics' },
@@ -23,7 +24,8 @@ export const AppContainer: React.FC = () => {
 
   useEffect(() => {
     setInfo();
-  });
+    console.log(DEVICES);
+  }, []);
 
   const setInfo = async () => {
     await ipcRenderer.on('CPU_INFO:get', (e, value) => {
@@ -40,6 +42,10 @@ export const AppContainer: React.FC = () => {
 
     await ipcRenderer.on('Memory_INFO:get', (e, value) => {
       SET_MEMORY_INFO(value);
+    });
+
+    await ipcRenderer.on('Devices_INFO:get', (e, value) => {
+      SET_DEVICES(value);
     });
   };
 
