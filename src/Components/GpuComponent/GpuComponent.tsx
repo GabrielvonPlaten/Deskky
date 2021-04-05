@@ -72,11 +72,6 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
       <div className={styles.systemInformation}>
         <div>
           <label>Usage</label>
-          {/* <p>
-            {Math.floor(
-              GPU_INFO?.controllers?.lastItem.memoryUsed / 100
-            ).toFixed(2)}
-          </p> */}
           <p>
             {new Intl.NumberFormat('de-DE', {
               style: 'unit',
