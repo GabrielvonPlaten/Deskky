@@ -7,35 +7,20 @@
   margin: 2%;
   color: #e6e6e6;
   font-weight: 400;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 20px;
 }
 
 .sidebar {
-  width: 90%;
-  height: 100%;
-  border-right: 1px solid rgba(119, 119, 134, 0.6);
-  overflow: hidden;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.sidebar ul {
-  margin: 2rem 0 0 2rem;
-  padding: 0;
+.navbarItem__container {
+  display: inline-block;
+  padding: 15px 15px 0 15px;
 }
 
-.siderbar {
-  margin-bottom: 20px;
-}
-
-.activeLink {
-  color: orange;
-}
 .navbarItem {
   color: #e6e6e6;
   text-decoration: none;
-  width: 100%;
-  height: 25px;
-  display: block;
-  padding: 5% 0 0 25%;
+  margin-right: 10px;
 }

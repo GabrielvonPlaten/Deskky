@@ -19,7 +19,6 @@ export const AppContainer: React.FC = () => {
     { id: 0, name: 'CPU', rName: '/' },
     { id: 1, name: 'Graphics', rName: '/graphics' },
     { id: 2, name: 'Memory', rName: '/memory' },
-    { id: 3, name: 'Devices', rName: '/devices' },
   ]);
 
   useEffect(() => {
@@ -51,13 +50,15 @@ export const AppContainer: React.FC = () => {
 
   return (
     <div className={styles.appContainer}>
-      <div className={styles.sidebar}>
+      <div className={styles.navbar}>
         {routerLinks.map((link) => (
           <div className={styles.navbarItem__container}>
             <Link
               exact
               className={styles.navbarItem}
-              activeStyle={{ background: 'rgba(255, 255, 255, 0.2)' }}
+              activeStyle={{
+                borderBottom: '2px solid rgba(255, 255, 255, 0.7)',
+              }}
               to={link.rName}
             >
               {link.name}

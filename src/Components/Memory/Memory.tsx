@@ -30,7 +30,6 @@ export const Memory: React.FC<any> = ({ MEMORY_INFO }) => {
 
   useEffect(() => {
     updateGpuHistogram();
-    console.log(MEMORY_INFO);
 
     // console.log(Math.floor(MEMORY_INFO?.available / 1000000000));
   }, [MEMORY_INFO]);
@@ -55,8 +54,8 @@ export const Memory: React.FC<any> = ({ MEMORY_INFO }) => {
   };
 
   return (
-    <div>
-      <h1>Hello Memory</h1>
+    <div className={styles.container}>
+      <h4 className={styles.title}>Memory</h4>
       <div className={styles.chartContainer}>
         <Chart
           chartType="AreaChart"

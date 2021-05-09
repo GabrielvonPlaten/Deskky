@@ -29,7 +29,7 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
   };
 
   useEffect(() => {
-    console.log(GPU_INFO);
+    // console.log(GPU_INFO);
 
     updateGpuHistogram();
   }, [GPU_INFO]);
@@ -112,7 +112,7 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
             <>
               <label>Display {index + 1}</label>
               <p>
-                {d.resolutionX} - {d.resolutionX} /
+                {d.resolutionX} - {d.resolutionX}
               </p>
             </>
           ))}
