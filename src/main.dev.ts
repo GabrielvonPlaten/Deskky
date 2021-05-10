@@ -11,10 +11,18 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+import emitter from 'events';
+
+import { CPU_Info, CPU_USAGE, CPU_TEMP, CPU_TIME } from '../SI/CPU';
+import { GPU_Info } from '../SI/GPU';
+import { Memory_Info } from '../SI/Memory';
+import { Devices_Info, Printer_Info } from '../SI/Devices';
+
+import { Extra_CPU_Info } from '../SI/CPU';
 
 export default class AppUpdater {
   constructor() {
@@ -69,9 +77,10 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: process.env.NODE_ENV === 'development' ? 1200 : 1000,
-    height: 700,
-    icon: getAssetPath('icon.png'),
+    width: process.env.NODE_ENV === 'development' ? 1425 : 1200,
+    height: 735,
+    frame: false,
+    icon: getAssetPath('icon_2.png'),
     webPreferences: {
       nodeIntegration: true,
     },
@@ -90,6 +99,15 @@ const createWindow = async () => {
     } else {
       mainWindow.show();
       mainWindow.focus();
+      getCPUInfo();
+      getExtraCpuInfo();
+      getDevicesInfo();
+
+      setInterval(() => {
+        getMemoryInfo();
+        getGPUInfo();
+        getCPUUsage();
+      }, 1000);
     }
   });
 
@@ -130,3 +148,52 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
+
+ipcMain.on('close-app', (event, arg) => {
+  app.quit();
+});
+
+ipcMain.on('mini-me', (event, arg) => {
+  BrowserWindow.getFocusedWindow()?.minimize();
+});
+
+// System Information
+const getCPUInfo = async () => {
+  const data = await CPU_Info();
+  mainWindow?.webContents.send('CPU_INFO:get', data);
+};
+
+const getCPUUsage = async () => {
+  const cpuUsageData = await CPU_USAGE();
+  const cpuTime = await CPU_TIME();
+  const cpuTemp = await CPU_TEMP();
+  mainWindow?.webContents.send('CPU_USAGE:get', {
+    cpuUsageData,
+    cpuTime,
+    cpuTemp,
+  });
+};
+
+const getGPUInfo = async () => {
+  const data = await GPU_Info();
+  mainWindow?.webContents.send('GPU_INFO:get', data);
+};
+
+const getMemoryInfo = async () => {
+  const data = await Memory_Info();
+  mainWindow?.webContents.send('Memory_INFO:get', data);
+};
+
+const getDevicesInfo = async () => {
+  const devicesData = await Devices_Info();
+  const printerData = await Printer_Info();
+  mainWindow?.webContents.send('Devices_INFO:get', {
+    devicesData,
+    printerData,
+  });
+};
+
+// Extra info | Not to be used
+const getExtraCpuInfo = async () => {
+  const data = await Extra_CPU_Info();
+};

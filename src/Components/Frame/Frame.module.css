@@ -1,0 +1,10 @@
+.frame {
+  height: 18px;
+  background: #291b6b;
+  padding: 1px;
+  color: #e4e4e4;
+  display: flex;
+  justify-content: flex-end;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}

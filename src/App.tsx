@@ -1,21 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.global.css';
 
-const Hello = () => {
-  return (
-    <div>
-      <h1>Hello</h1>
-    </div>
-  );
-};
+// Components
+import { Frame } from './Components/Frame/Frame';
+import { AppContainer } from './Components/AppContainer/AppContainer';
+import { HashRouter } from 'react-router-dom';
 
 export default function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
-    </Router>
+    <HashRouter>
+      <Frame />
+      <AppContainer />
+    </HashRouter>
   );
 }

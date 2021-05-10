@@ -5,7 +5,12 @@
 body {
   color: #252525;
   height: 100vh;
-  background: white;
+  background: linear-gradient(
+    116.1deg,
+    #2c1d77 0%,
+    #2333a6 99.99%,
+    #1b256f 100%
+  );
   font-family: sans-serif;
   padding: 0px;
   margin: 0px;
@@ -13,4 +18,26 @@ body {
 
 li {
   list-style: none;
+}
+
+button {
+  outline: none;
+}
+
+.btn {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fafafa;
+  background: rgba(155, 155, 155, 0.137);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.137);
+}
+
+.title {
+  font-weight: 300;
+  font-size: 1.1rem;
+  text-decoration-color: #9b9b9b6e;
 }
