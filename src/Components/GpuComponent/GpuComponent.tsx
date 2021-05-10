@@ -55,9 +55,7 @@ export const GpuComponent: React.FC<any> = ({ GPU_INFO }) => {
 
   return (
     <div className={styles.container}>
-      <h4 className={styles.gpuBrandName}>
-        {GPU_INFO?.controllers?.lastItem.name}
-      </h4>
+      <h4 className={styles.title}>{GPU_INFO?.controllers?.lastItem.name}</h4>
       <div className={styles.chartContainer}>
         <Chart
           chartType="AreaChart"

@@ -72,7 +72,7 @@ export const Home: React.FC<CPU_INFO_Interface & CPU_USAGE_Interface> = ({
 
   return (
     <div className={styles.container}>
-      <h4 className={styles.cpuBrandName}>{CPU_INFO?.brand}</h4>
+      <h4 className={styles.title}>{CPU_INFO?.brand}</h4>
       <div className={styles.chartContainer}>
         <Chart
           chartType="AreaChart"

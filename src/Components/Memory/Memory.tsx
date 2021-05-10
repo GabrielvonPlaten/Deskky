@@ -55,7 +55,7 @@ export const Memory: React.FC<any> = ({ MEMORY_INFO }) => {
 
   return (
     <div className={styles.container}>
-      <h4 className={styles.title}>Memory</h4>
+      <h4 className={styles.title}>Memory (RAM)</h4>
       <div className={styles.chartContainer}>
         <Chart
           chartType="AreaChart"

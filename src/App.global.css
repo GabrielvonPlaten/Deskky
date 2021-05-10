@@ -35,3 +35,9 @@ button {
 .btn:hover {
   background: rgba(255, 255, 255, 0.137);
 }
+
+.title {
+  font-weight: 300;
+  font-size: 1.1rem;
+  text-decoration-color: #9b9b9b6e;
+}
